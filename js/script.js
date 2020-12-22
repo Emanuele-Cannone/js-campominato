@@ -9,7 +9,7 @@
 
 var numeriPc = [];
 var numeriUtente = [];
-
+var partitaFinita = false;
 
 
 while (numeriPc.length < 16){ // fino a quando la lunghezza di numeriPc è inferiore a 16
@@ -21,17 +21,19 @@ while (numeriPc.length < 16){ // fino a quando la lunghezza di numeriPc è infer
 
 console.log(numeriPc);// vedi se non esplode il mondo
 
-while (numeriUtente.length < 16){ // fino a quando la lunghezza di numeriUtente è inferiore a 16
+while (numeriUtente.length < 16 && partitaFinita == false){ // fino a quando la lunghezza di numeriUtente è inferiore a 16
   var numeriPlayer = parseInt(prompt('inserisci un numero da 1 a 100')); // chiedi di inserire un numero da 1 a 100
   if (numeriPlayer < 1 || numeriPlayer > 100){// se il numero inserito non è tra 1 e 100 
     alert('hai perso!');// allora hai perso
-  } else if (numeriUtente.includes(numeriPlayer) == false){ // se il numero non è uguale a quello già inserito
+    partitaFinita = true;
+  } else if (numeriUtente.includes(numeriPlayer) == false && numeriPc.includes(numeriPlayer) == false){ // se il numero non è uguale a quello già inserito dall'utente e che non sia presente nella lista dei numeri generati dal pc
     numeriUtente.push(numeriPlayer); // allora pushalo nell'array
   } else if(numeriUtente.length == numeriPc.length){// se il valore numerico dell'array numeriUtente e numeriPc è uguale
     alert('hai vinto!');// hai vinto
   } else { // sennò
     alert('hai perso!'); //hai perso
     console.log('i tentativi sono stati ' + numeriUtente.length);
+    partitaFinita = true;
   }
 }
 
